@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewBag.PageTitle = "Category Managment";
+    ViewBag.CardTitle = " View Category";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="Create-Container">
+    <a class="btn btn-primary" href="/CategoryController1/Create">Create</a>
+</div>
+<table class="table table-hover" width="80%">
+    <thead>
+        <td>Name</td>
+        <td>Description</td>
+        <td>CreatedTime</td>
+        <td>Actions</td>
+
+    </thead>
+@foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.CreatedTime</td>
+            <td> <a class="btn btn-success" href="/CategoryController1/Edit/@item.Id">Edit</a>
+                <a class="btn btn-danger" href="/CategoryController1/Delete/@item.Id">Delete</a>
+            </td>
+
+        </tr>
+        
+    }
+</table>
