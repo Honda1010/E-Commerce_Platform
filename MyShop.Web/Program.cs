@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyShop.DataAccess.Data;
+using MyShop.DataAccess.Implementations;
+using MyShop.Entities.Repository;
 
 namespace MyShop.Web
 {
@@ -14,6 +16,7 @@ namespace MyShop.Web
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // package to auto save compile
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             // to send connectionstring as parameter for applicationDbContext from app settings
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
