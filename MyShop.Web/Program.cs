@@ -13,7 +13,7 @@ namespace MyShop.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // package to auto save compile
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // Nuget Package to live-server the website
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             // to send connectionstring as parameter for applicationDbContext from app settings
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
