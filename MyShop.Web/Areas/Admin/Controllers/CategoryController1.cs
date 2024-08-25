@@ -4,15 +4,16 @@ using MyShop.DataAccess.Implementations;
 using MyShop.Entities.Models;
 using MyShop.Entities.Repository;
 
-namespace MyShop.Web.Controllers
+namespace MyShop.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController1 : Controller
     {
         //private readonly ApplicationDbContext _context;
         private IUnitOfWork _UnitOfWork;
         public CategoryController1(IUnitOfWork UnitOfWork)
         {
-          _UnitOfWork = UnitOfWork;
+            _UnitOfWork = UnitOfWork;
         }
         public IActionResult Index()
         {
@@ -44,11 +45,12 @@ namespace MyShop.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0) {
+            if (id == null || id == 0)
+            {
                 NotFound();
             }
             //var category_by_id = _context.Categories.Find(id);
-              var category_by_id =_UnitOfWork.Category.GetFirstorDefault(c => c.Id==id);
+            var category_by_id = _UnitOfWork.Category.GetFirstorDefault(c => c.Id == id);
             return View(category_by_id);
         }
         [HttpPost]
@@ -74,7 +76,7 @@ namespace MyShop.Web.Controllers
                 NotFound();
             }
             //var category_by_id = _context.Categories.Find(id);
-            var category_by_id = _UnitOfWork.Category.GetFirstorDefault(c => c.Id==id);
+            var category_by_id = _UnitOfWork.Category.GetFirstorDefault(c => c.Id == id);
             return View(category_by_id);
         }
         [HttpPost]

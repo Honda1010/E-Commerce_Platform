@@ -1,0 +1,39 @@
+﻿@model ProductVM
+@{
+    ViewBag.PageTitle = "Product Managment";
+    ViewBag.CardTitle = "Product";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<form method="post" asp-action="Create" enctype="multipart/form-data"> 
+    <div class="mb-3">
+        <label asp-for="Product.Name" class="control-label"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.Description" class="control-label"></label>
+        <input asp-for="Product.Description" class="form-control" />
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.price" class="control-label"></label>
+        <input asp-for="Product.price" class="form-control" />
+        <span asp-validation-for="Product.price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.Image" class="control-label"></label>
+        <input type="file" name="file" id="imgfile" class="form-control" onchange="fillimg(event);" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Product.CategoryId" class="control-label"></label>
+        <select asp-items="Model.Categorylist" asp-for="Product.CategoryId" class="form-control">
+            <option disabled selected>--select Category--</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" asp-controller="CategoryController1" class="btn btn-warning">Return to index</a>
+
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
