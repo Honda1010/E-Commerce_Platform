@@ -38,6 +38,9 @@ namespace MyShop.Web
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");        
 
             app.Run();
         }
