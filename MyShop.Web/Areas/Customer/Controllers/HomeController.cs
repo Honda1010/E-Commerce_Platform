@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Entities.Repository;
-using MyShop.Entities.ViewModels;
+using MyShop.Entities.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using MyShop.DataAccess.Implementations;
 
 namespace MyShop.Web.Areas.Customer.Controllers
 {
@@ -18,14 +21,27 @@ namespace MyShop.Web.Areas.Customer.Controllers
             var product = _UnitOfWork.Product.GetAll();
             return View(product);
         }
-        public IActionResult Details(int? id) {
-
-            var ShoppingCart = new ShoppingCart()
+        public IActionResult Details(int ProductId)
+        {
+            ShoppingCart obj = new ShoppingCart()
             {
-                Product = _UnitOfWork.Product.GetFirstorDefault(p => p.Id == id, Includedword: "Category"),
+                Product=_UnitOfWork.Product.GetFirstorDefault(p => p.Id == ProductId, Includedword:"Category"),
+                ProductId= ProductId,
                 Count=1
             };
-            return View(ShoppingCart);
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimIdentity = (ClaimsIdentity)User.Identity; // to represent identity of current user
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier); // find specific claim which contain user_id
+            shoppingCart.ApplicationUserId= claim.Value; // return value of id from claim
+            _UnitOfWork.ShoppingCart.Add(shoppingCart);
+            _UnitOfWork.Complete();
+            return RedirectToAction("Index");
         }
     }
 }

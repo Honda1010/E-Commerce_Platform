@@ -10,6 +10,7 @@ namespace MyShop.Entities.Repository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        IShoppingCartRepository ShoppingCart { get; }
 
         int Complete();
         void Dispose();

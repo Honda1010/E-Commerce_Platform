@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Entities.Models;
+using System.Reflection.Emit;
 
 namespace MyShop.DataAccess.Data
 {
@@ -25,5 +26,7 @@ namespace MyShop.DataAccess.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ShoppingCart> shoppingCarts { get; set; }
+
     }
 }
