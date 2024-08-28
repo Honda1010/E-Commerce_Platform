@@ -39,7 +39,14 @@ namespace MyShop.Web.Areas.Customer.Controllers
             var claimIdentity = (ClaimsIdentity)User.Identity; // to represent identity of current user
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier); // find specific claim which contain user_id
             shoppingCart.ApplicationUserId= claim.Value; // return value of id from claim
-            _UnitOfWork.ShoppingCart.Add(shoppingCart);
+            ShoppingCart cartobj = _UnitOfWork.ShoppingCart.GetFirstorDefault(c=> c.ApplicationUserId==claim.Value && c.ProductId==shoppingCart.ProductId);
+            if (cartobj == null)
+            {
+                _UnitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+            else {
+                _UnitOfWork.ShoppingCart.IncreaseCount(cartobj,shoppingCart.Count);
+            }
             _UnitOfWork.Complete();
             return RedirectToAction("Index");
         }
