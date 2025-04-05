@@ -23,5 +23,6 @@ namespace MyShop.Entities.Models
         public int CategoryId { get; set; }
         [ValidateNever]
         public Category Category { get; set; }
+
     }
 }
