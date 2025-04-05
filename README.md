@@ -15,7 +15,6 @@
 - [Usage](#usage)
 - [Code Structure](#code-structure)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Overview
 
@@ -70,3 +69,29 @@ E-Commerce Platform is a full-featured web application for managing an online st
    ```
    Press `F5` or `Ctrl+F5` in Visual Studio to build and launch the app
    ```
+
+## Usage
+
+- **Browse Products**: Navigate by category or search bar to explore the catalog.
+- **Add to Cart**: Use the “Add to Cart” button to add products.
+- **Cart Management**: View cart, update quantities, or remove items.
+- **Checkout**: Place an order after logging in or registering.
+- **Admin Panel**: If logged in as admin, manage inventory and orders.
+
+## Code Structure
+
+- **MyShop.Web**  
+  ASP.NET MVC application – contains UI, controllers, and views.
+
+- **MyShop.DataAccess**  
+  Handles data access logic, Entity Framework context, and repositories.
+
+- **MyShop.Entities**  
+  Contains all model/entity classes used across the application.
+
+- **MyShop.Utilities**  
+  Helper classes, constants, and shared utilities.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
